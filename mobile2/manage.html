@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CIE-H12 Management</title>
+		
+		<meta name="author" content="Sollae Systems Co., Ltd.">
+		<meta name="copyright" content="&copy;2018 Sollae Systems Co., Ltd.">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+		<meta name="format-detection" content="telephone=no">
+		<link rel="icon" href="favicon.ico" type="images/x-icon">
+		<link rel="shortcut icon" href="favicon.ico" type="images/x-icon">
+		<link rel="apple-touch-icon" href="remio.png">
+		
+		<script type="text/javascript">
+			window.addEventListener("load", function(){setTimeout(loaded, 100)}, false);
+			function loaded(){window.scrollTo(0, 1);}
+		</script>
+
+		<script type="text/javascript">
+		function callNumber(num){
+			location.href="tel:"+num;
+		}
+		</script>
+
+		<style type="text/css">
+			<!--
+			/* common */
+			body,h1,h2{margin:0;padding:0;-webkit-text-size-adjust:none;}	
+
+			#wrap{min-width:314px;}
+
+			/* header */
+			.hd{position:relative;padding:15px 0 0 18px;height:32px;background:url(bg.gif) repeat-x left top;}
+			.hd h1{position:absolute;top:8px; left:20px;}
+			.hd h2{position:absolute;top:8px; right:20px;}
+
+			/* notice */
+			.notice{padding:19px 0 18px 16px;border-bottom:1px solid #e5e5e5;}
+
+			/* contents */
+			.list{padding:10px 10px 10px 10px;border-bottom:1px solid #e5e5e5;}
+
+			.Button {
+				-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+				-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+				box-shadow:inset 0px 1px 0px 0px #ffffff;
+				background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #d1d1d1) );
+				background: -moz-linear-gradient( center top, #ffffff 5%, #d1d1d1 100% );
+				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d1d1d1');
+				background-color:#d7d7d7;
+				-moz-border-radius:6px;
+				-webkit-border-radius:6px;
+				border-radius:6px;
+				border:1px solid #dcdcdc;
+				display:inline-block;
+				color:#777777;
+				font-family:arial;
+				font-size:15px;
+				font-weight:bold;
+				padding:6px 24px;
+				text-decoration:none;
+				text-shadow:1px 1px 0px #ffffff;
+			}
+			.Button:hover {
+				background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d1d1d1), color-stop(1, #ffffff) );
+				background:-moz-linear-gradient( center top, #d1d1d1 5%, #ffffff 100% );
+				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d1d1d1', endColorstr='#ffffff');
+				background-color:#d1d1d1;
+			}
+			.Button:active {
+				position:relative;
+				top:1px;
+			}
+
+			body {margin:0;background-color:#000}
+			ul {margin:0;padding:0}
+			li {padding:8px 10px;font-size:20px;border-bottom:1px solid #1F1F1F;list-style:none;clear:both;overflow:hidden;color:#CCC}
+			li.sectiontitle {font-weight:bold;background-color:#161616;text-align:center;clear:both;color:#FFF}
+			li .name {float:left}
+			li .number {float:right;color:#3366FF}
+			-->
+		</style>
+	</head>
+		
+	<body bgcolor=#FFFFFF onorientationchange="updateOrientation();"> 
+		<div id="wrap">
+
+			<!-- header -->
+			<div class="hd">
+				<h1><a href="index.html" class="Button">점검</a></h1>
+				<h2><a href="manage.html" class="Button">관리</a></h2>
+			</div>
+			<!-- //header -->
+
+			<ul>
+				<li class="sectiontitle">발전기 담당자</li>
+				<li onclick="callNumber('010-000-0000')"><div class="name">홍길동</div><div class="number">010-000-0000</div></li>
+				<li class="sectiontitle">제품 구매</li>
+				<li onclick="callNumber('02-716-0204')"><div class="name">아이네스트</div><div class="number">02-716-0204</div></li>
+				<li class="sectiontitle">유지 보수</li>
+				<li onclick="callNumber('032-245-2323')"><div class="name">솔내시스템</div><div class="number">032-245-2323</div></li>
+			</ul>
+
+		</div>
+	</body>
+</html>

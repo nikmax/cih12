@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Schranke - Haupteinfahrt</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+		<link rel="icon" href="favicon.ico" type="images/x-icon">
+		<link rel="shortcut icon" href="favicon.ico" type="images/x-icon">
+		<link rel="apple-touch-icon" href="favicon.ico">
+		<style type="text/css">
+			body, html {
+				margin: 0;
+				padding: 0;
+				position: absolute;
+				top 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				width: 100vw;
+				height: 100vh;			}
+			#wrap {
+				width: 100vw;
+				height: 100vh;
+			    display: flex;
+    			flex-direction: column;
+    			justify-content: center;
+	    		align-items: center;
+			}
+			#hd {
+				text-align: center;
+				border-style: solid;
+				border-radius: 10px;
+				padding: 10px;
+			}
+			.red {
+				display: block;
+				background-color: red !important;
+			}
+			.blink {
+				background-color: #ff5722;
+			}
+			.green {
+				background-color: green !important;
+			}
+
+
+			#button:hover{
+				cursor: pointer;
+			}
+			#error, #password{
+				position: absolute;
+				width: 100vw;
+				height: 100vh;
+				background-color: grey;
+				opacity: 0.5;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				z-index: 99;
+
+			}
+			#error + div, #password + form {
+				position: absolute;
+				margin: 0 20px;
+				background-color: red;
+				color: white;
+				font-weight: bold;
+				font-size: large;
+				
+				text-align: center;
+				z-index: 100;
+				padding: 30px;
+				border-radius: 10px;
+			}
+			.hidden{
+				display : none !important;
+			}
+			input{
+				font-size: xx-large;
+				width: 40px;
+				height: 50px;
+				text-align: center;
+			}
+		</style>
+		<script>
+			// onorientationchange="location.reload()" 
+			window.addEventListener('load', start);
+			const file = "getStatus.html";
+			let onTaster = 'on.png';
+			let offTaster = 'off.png';
+			let pulse = 0;
+			let counter = 0;
+			let times = 0;
+			let timetopass= false;
+			let myAjax;
+
+			if(typeof(ActiveXObject) != "undefined")
+			{
+				myAjax = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else
+			{
+				myAjax = new XMLHttpRequest();
+			}
+			function start(){
+				timetopass = true;
+				let inp = document.querySelectorAll('input');
+				inp.forEach(function(itm,ind){
+					itm.addEventListener("focus", function(){
+						this.value = "";
+						document.querySelector('#pswfalse').classList.add('hidden');
+					});
+					itm.addEventListener("keyup", function(){
+						if(this.nextElementSibling != null && this.nextElementSibling.tagName == 'INPUT') {
+							this.nextElementSibling.focus();
+						} else {
+							let psw = "";
+							document.querySelectorAll('input').forEach(function(itm,ind){
+								psw += itm.value;
+							});
+							if(psw != '0000') document.querySelector('#pswfalse').classList.remove('hidden');
+							else sendPulse();
+
+						}
+					});
+				})
+				getStatusInfo();
+			}
+			function getStatusInfo() {
+				try {
+					if (pulse != 0) pulse = `p0=${pulse}&`;
+					else pulse = "";
+					myAjax.open("GET", file +'?' + pulse + Math.floor((Math.random()*1000000)+1));
+					myAjax.onreadystatechange = getResult;
+					myAjax.send("");
+					pulse = 0;
+				} catch (e) {
+					setError('httpRequestError: '+ e);
+					return false;
+				}
+			}
+			function getResult() {
+				if(myAjax.readyState == 4 && myAjax.status == 200) {
+					let ind = false;
+					let el = document.querySelector('#button');
+					setTimeout(getStatusInfo,1000);
+					
+					if (times > 60) timetopass = true;
+					else times++;
+					if (counter > 1) {
+						el.parentNode.classList.remove('blink');
+						counter = 0;
+					} else counter++;
+
+					try{
+						let received = JSON.parse(myAjax.responseText);
+						if(received != null) {
+							if (received.io_o0 != null && received.io_i0 != null && received.io_i1 != null){
+								if(isNaN(received.io_o0) || received.io_o0 < 0 || received.io_o0 > 1 || isNaN(received.io_i0) || received.io_i0 < 0 || received.io_i0 > 1 || isNaN(received.io_i1) || received.io_i1 < 0 || received.io_i1 > 1)
+									setError('Relais oder Taster falscher Parameter (2): ' + myAjax.responseText);
+								else {
+									setOK();
+									if (received.io_o0 == 1) el.src = onTaster;
+									else el.src = offTaster;
+									if (received.io_i0 == 1 || received.io_i1 == 1) {
+										el.parentNode.classList.toggle('blink');
+										counter = 0;
+									}
+								} 
+							} else setError('Relais oder Taster falscher Parameter (1): ' + myAjax.responseText);
+						}
+					} catch (e){
+						setError(e);
+						return false;
+					}
+				}
+			}
+			function sendPulse(){
+				document.querySelector('#password').classList.add('hidden');
+				document.querySelector('form').classList.add('hidden');
+				timetopass = false;
+				times = 0;
+				pulse =1000;
+				let el = document.querySelector('#button');
+				try{
+					if(el.src.indexOf(offTaster) != -1) el.src = onTaster;
+					else el.src = offTaster;
+				} catch (e) {
+					setError(e);
+					return false;
+				}
+			}
+			function testPsw(){
+				if(!timetopass) sendPulse();
+				else{
+					document.querySelector('#password').classList.remove('hidden');
+					document.querySelector('form').classList.remove('hidden');
+					let inp = document.querySelectorAll('input');
+					inp.forEach(function(itm,ind){itm.value = "";});
+					inp[0].focus();
+					}
+			}
+			function setOK(){
+				let el = document.querySelector('#error');
+				el.nextElementSibling.classList.add('hidden');
+				el.classList.add('hidden');
+			}
+			function setError(e){
+				let el = document.querySelector('#error');
+				el.classList.remove('hidden');
+				el.nextElementSibling.innerHTML = e ;
+				el.nextElementSibling.classList.remove('hidden');
+			}
+		</script>
+	</head>
+	
+	<body> 
+		<div id="wrap">
+			<div id="hd">
+				<h1>Schranke</h1>
+				<img id="button" src="off.png" onclick="testPsw()">
+				<h1>Haupteinfahrt</h1>
+			</div>
+			<div id="error" class="hidden"></div>
+			<div class="hidden"></div>
+			<div id="password" class="hidden"></div>
+			<form  class="hidden" style="background-color: lightseagreen;">
+				<p>Bitte Passwort eingeben</p>
+
+				<input type="password" name="1" maxlength="1">
+				<input type="password" name="2" maxlength="1">
+				<input type="password" name="3" maxlength="1">
+				<input type="password" name="4" maxlength="1">
+				<p id="pswfalse" class="hidden" style="background-color: red;">falsche eingabe</p>
+			</form>
+			<p></p>
+		</div>
+	</body>
+</html>

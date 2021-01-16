@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+        </title>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css">
+        <style>
+            /* App custom styles */
+        </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js">
+        </script>
+        <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js">
+        </script>
+    </head>
+    <body>
+        <div data-role="page" id="allPage">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    CIE-H12
+                </h3>
+				<a href="index.html#allPage" data-icon="refresh" data-iconpos="notext" data-direction="reverse">Refresh</a>
+            </div>
+            <div data-role="content">
+                <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                    <li data-role="list-divider" role="heading">
+                        Input
+                    </li>
+                    <li data-theme="c">
+                        <a href="#input0Page" data-transition="slide">
+							<span id="input0AllPage"></span><span style="margin-left:10px;"><? io_echo($ci0); ?></span>
+                        </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#input1Page" data-transition="slide">
+                            <span id="input1AllPage"></span><span style="margin-left:10px;"><? io_echo($ci1); ?></span>
+                        </a>
+                    </li>
+                </ul>
+                <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                    <li data-role="list-divider" role="heading">
+                        Output
+                    </li>
+                    <li data-theme="c">
+                        <a href="#output0Page" data-transition="slide">
+                            <span id="output0AllPage"></span><span style="margin-left:10px;"><? io_echo($co0); ?></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+			<div data-role="footer" data-id="foo1" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#allPage" class="ui-btn-active ui-state-persist">ALL</a></li>
+						<li><a href="#input0Page" data-transition="slideup">Port</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
+		</div>
+
+        <div data-role="page" id="input0Page">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    CIE-H12 [<? io_echo($c0); ?>]
+                </h3>
+				<a href="index.html#input0Page" data-icon="refresh" data-iconpos="notext" data-direction="reverse">Refresh</a>
+            </div>
+            <div data-role="content">
+                <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                    <li data-role="list-divider" role="heading">
+                        Input 0
+                    </li>
+                </ul>
+                <div style="text-align:center;">
+                    <a href=""><span id="input0Input0Page"></span></a>
+				<p>
+				<a data-role="button" data-icon="arrow-l" data-transition="slide" data-direction="reverse" href="#output0Page" data-inline="true" style="width:45%;">
+                    Output 0
+                </a>
+                <a data-role="button" data-icon="arrow-r" data-iconpos="right" data-transition="slide" href="#input1Page" data-inline="true" style="width:45%;">
+                    Input 1
+                </a>
+				</p>
+			   </div> <!-- div -->
+	        </div><!-- content -->
+
+			<div data-role="footer" data-id="foo1" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#allPage" data-transition="slidedown">ALL</a></li>
+						<li><a href="" class="ui-btn-active ui-state-persist">Port</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
+		</div><!-- input0Page -->
+
+        <div data-role="page" id="input1Page">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    CIE-H12 [<? io_echo($c0); ?>]
+                </h3>
+				<a href="index.html#input1Page" data-icon="refresh" data-iconpos="notext" data-direction="reverse">Refresh</a>
+            </div>
+            <div data-role="content">
+                <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                    <li data-role="list-divider" role="heading">
+                        Input 1
+                    </li>
+                </ul>
+                <div style="text-align:center;">
+                    <a href=""><span id="input1Input1Page"></span></a>
+				<p>
+				<a data-role="button" data-icon="arrow-l" data-transition="slide" data-direction="reverse" href="#input0Page" data-inline="true" style="width:45%;">
+                    Input 0
+                </a>
+                <a data-role="button" data-icon="arrow-r" data-iconpos="right" data-transition="slide" href="#output0Page" data-inline="true" style="width:45%;">
+                    Output 0
+                </a>
+				</p>
+			   </div> <!-- div -->
+	        </div><!-- content -->
+
+			<div data-role="footer" data-id="foo1" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#allPage" data-transition="slidedown">ALL</a></li>
+						<li><a href="" class="ui-btn-active ui-state-persist">Port</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
+		</div><!-- input1Page -->
+
+        <div data-role="page" id="output0Page">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    CIE-H12 [<? io_echo($c0); ?>]
+                </h3>
+				<a href="index.html#output0Page" data-icon="refresh" data-iconpos="notext" data-direction="reverse">Refresh</a>
+            </div>
+            <div data-role="content">
+                <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                    <li data-role="list-divider" role="heading">
+                        Output 0
+                    </li>
+                </ul>
+                <div style="text-align:center;">
+                    <a href=""><span id="output0Output0Page"></span></a>
+				<p>
+				<a data-role="button" data-icon="arrow-l" data-transition="slide" data-direction="reverse" href="#input1Page" data-inline="true" style="width:45%;">
+                    Input 1
+                </a>
+                <a data-role="button" data-icon="arrow-r" data-iconpos="right" data-transition="slide" href="#input0Page" data-inline="true" style="width:45%;">
+                    Input 0
+                </a>
+				</p>
+			   </div> <!-- div -->
+	        </div><!-- content -->
+
+			<div data-role="footer" data-id="foo1" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#allPage" data-transition="slidedown">ALL</a></li>
+						<li><a href="" class="ui-btn-active ui-state-persist">Port</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
+		</div><!-- output0Page -->
+
+        <script>
+            //App custom javascript
+				startAjax("getProductStatus.html");
+
+			$(document).ready(function(){
+
+				$('#allPage').bind("pageshow", function() {
+					startAjax("getProductStatus.html");
+				});
+
+				$('#input0Page').bind("pageshow", function() {
+					startAjax("getProductStatus.html");
+				});
+
+				$('#input1Page').bind("pageshow", function() {
+					startAjax("getProductStatus.html");
+				});
+
+				$('#output0Page').bind("pageshow", function() {
+					startAjax("getProductStatus.html");
+				});
+
+				$('#allPage').bind("pagehide", function() {
+					startAjax("getProductStatus.html");
+				});
+
+				$('#input0Page').bind("pagehide", function() {
+					startAjax("getProductStatus.html");
+				});
+
+				$('#input1Page').bind("pagehide", function() {
+					startAjax("getProductStatus.html");
+				});
+
+				$('#output0Page').bind("pagehide", function() {
+					startAjax("getProductStatus.html");
+				});
+				
+				// set Button event
+				$("#readBtn").click(function(){
+					window.location = "index.html";
+				}).css("cursor","pointer");	
+
+			});
+
+
+			function startAjax(url){
+
+				$.ajax({
+					type : 'GET',
+					dataType : 'json',
+					url : url,
+					cache : false,
+					async : true,
+					success: printDataJsonCallback,
+					error: onError
+
+				});
+			}
+
+			function onError(data, status) {
+				alert(status);
+			}
+
+			function printDataJsonCallback(data, status) {
+				if('success' == status) {
+
+
+					var input_0 = data.input_01;
+					var input_1 = data.input_02;
+					var output_0 = data.output_01;
+
+					if ("off" == input_0) {
+						$("#input0AllPage").html("<img src='input0_off.png' style='vertical-align:middle;width:36px;height:36px;'>");
+						$("#input0Input0Page").html("<img src='input0_off.png' style='vertical-align:middle;width:96px;height:96px;'>");
+					}else {
+						$("#input0AllPage").html("<img src='input0_on.png' style='vertical-align:middle;width:36px;height:36px;'>");
+						$("#input0Input0Page").html("<img src='input0_on.png' style='vertical-align:middle;width:96px;height:96px;'>");
+					}
+
+					if ("off" == input_1) {
+						$("#input1AllPage").html("<img src='input1_off.png' style='vertical-align:middle;width:36px;height:36px;'>");
+						$("#input1Input1Page").html("<img src='input1_off.png' style='vertical-align:middle;width:96px;height:96px;'>");
+					}else {
+						$("#input1AllPage").html("<img src='input1_on.png' style='vertical-align:middle;width:36px;height:36px;'>");
+						$("#input1Input1Page").html("<img src='input1_on.png' style='vertical-align:middle;width:96px;height:96px;'>");
+					}
+
+					if ("off" == output_0) {
+						$("#output0AllPage").html("<a href=javascript:startAjax('getProductStatus.html?o0=1');><img src='output0_off.png' style='vertical-align:middle;width:36px;height:36px;'></a>");
+						$("#output0Output0Page").html("<a href=javascript:startAjax('getProductStatus.html?o0=1');><img src='output0_off.png' style='vertical-align:middle;width:96px;height:96px;'></a>");
+					}else {
+						$("#output0AllPage").html("<a href=javascript:startAjax('getProductStatus.html?o0=0');><img src='output0_on.png' style='vertical-align:middle;width:36px;height:36px;'></a>");
+						$("#output0Output0Page").html("<a href=javascript:startAjax('getProductStatus.html?o0=0');><img src='output0_on.png' style='vertical-align:middle;width:96px;height:96px;'></a>");
+					}
+
+
+				}else {
+					alert("Sorry...");
+				}
+			}
+
+        </script>
+    </body>
+</html>

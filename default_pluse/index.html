@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CIE-H12</title>
+		<meta name="author" content="Sollae Systems Co., Ltd.">
+		<meta name="copyright" content="&copy;2018 Sollae Systems Co., Ltd.">
+		<link rel="icon" href="favicon.ico" type="images/x-icon">
+		<link rel="shortcut icon" href="favicon.ico" type="images/x-icon">
+		<style type="text/css">
+			<!--
+			#bg {position:relative; margin: 0 auto; width: 650px; height: 406px; background: url(bg.jpg) no-repeat center top;}
+			#input_01_cmt {font-family:"Times New Roman"; position:absolute; top:136px; left:34px; font-size: 11px;}
+			#input_02_cmt {font-family:"Times New Roman"; position:absolute; top:167px; left:34px; font-size: 11px;}
+			#output_01_cmt {font-family:"Times New Roman"; position:absolute; top:146px; right:37px; font-size: 11px;}
+			#input_01_btn {position:absolute; top:136px; left:218px;}
+			#input_02_btn {position:absolute; top:166px; left:218px;}
+			#output_01_btn {position:absolute; top:146px; left:399px;}
+			#read_btn {position:absolute; top:280px; left:285px; background-color:#ededed; border:1px solid #dcdcdc; color:#777777; font-size:13px; font-weight:bold; padding:5px 14px; text-decoration:none;}
+			#read_btn:hover {background-color:#dfdfdf;}
+			-->
+		</style>
+		<script>
+		var pos = window.location.href.indexOf("?p");
+		var url;
+		if (pos != -1)
+		{
+			url = window.location.href.split("?");
+
+			var param = url[1];
+			if (param !=  "")
+			{			
+				var ptime = param.split("=");
+				if (ptime[1] !=  "")
+				{
+					var refresh_time = parseInt(ptime[1]) + 1000;
+					setTimeout("goToIndex()", refresh_time);
+				}		
+			}
+		}
+		function pulseCtrl(port)
+		{
+			window.location.href="index.html?" + port + "=1000";
+		}
+		function goToIndex()
+		{
+			window.location.href="index.html";	
+		}
+		</script>
+	</head>
+	
+	<body>
+		<div id="bg">
+			<div id="input_01_cmt"><? io_echo($ci0); ?></div>
+			<div id="input_02_cmt"><? io_echo($ci1); ?></div>
+			<div id="input_01_btn"><? io_echo_equ($i0, 0, "<img src=y_off.png border=0>", "<img src=y_on.png border=0>"); ?></div>
+			<div id="input_02_btn"><? io_echo_equ($i1, 0, "<img src=y_off.png border=0>", "<img src=y_on.png border=0>"); ?></div>
+			
+			<div id="output_01_cmt"><? io_echo($co0); ?></div>
+			<div id="output_01_btn"><? io_echo_equ($o0, 0, "<img src=p_off.png border=0 onclick=javascript:pulseCtrl('p0');>", "<img src=p_on.png border=0 onclick=javascript:pulseCtrl('p0');>"); ?></div>
+			
+			<a href="index.html" id="read_btn">Read</a>			
+		</div>
+	</body>
+</html>

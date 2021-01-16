@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CIE-H12</title>
+		<meta name="author" content="Sollae Systems Co., Ltd.">
+		<meta name="copyright" content="&copy;2018 Sollae Systems Co., Ltd.">
+		<link rel="icon" href="favicon.ico" type="images/x-icon">
+		<link rel="shortcut icon" href="favicon.ico" type="images/x-icon">
+		<style type="text/css">
+			<!--
+			#bg {position:relative; margin: 0 auto; width: 650px; height: 700px; background: url(bg.gif) no-repeat center top;}
+			#input_01_cmt {font-family:"Times New Roman"; position:absolute; top:136px; left:34px; font-size: 11px;}
+			#input_02_cmt {font-family:"Times New Roman"; position:absolute; top:167px; left:34px; font-size: 11px;}
+			#output_01_cmt {font-family:"Times New Roman"; position:absolute; top:146px; right:37px; font-size: 11px;}
+			
+			#input_01_btn {position:absolute; top:422px; left:336px;}
+			#input_02_btn {position:absolute; top:422px; left:378px;}
+			#input_03_btn {position:absolute; top:392px; left:336px;}
+			#input_04_btn {position:absolute; top:392px; left:378px;}
+			#input_05_btn {position:absolute; top:111px; left:202px;}
+			#input_06_btn {position:absolute; top:111px; left:333px;}
+			
+			
+			
+			#output_01_btn {position:absolute; top:422px; left:453px;}
+			#output_02_btn {position:absolute; top:392px; left:453px;}
+			#output_03_btn {position:absolute; top:253px; left:268px;}
+			#output_04_btn {position:absolute; top:580px; left:190px;}
+			#home_btn {position:absolute; top:418px; left:218px; width:13px; height:13px; font-weight:bold; padding:3px 3px; text-decoration:none;}
+			#home_btn:hover {background-color:grey;}
+			#read_btn {position:absolute; top:390px; left:247px; width:13px; height:13px; font-weight:bold; padding:3px 3px; text-decoration:none;}
+			#read_btn:hover {background-color:grey;}
+			#user_btn {position:absolute; top:390px; left:191px; width:13px; height:13px; font-weight:bold; padding:3px 3px; text-decoration:none;}
+			#user_btn:hover {background-color:grey;}
+			#status {position:absolute; top:480px; left:155px; width:400px; height:13px; font-weight:bold; padding:3px 3px; text-decoration:none;}
+			-->
+		</style>
+		<script type="text/javascript">
+			function toggleStatus(){
+				document.getElementById("status").style.display = "block";
+			}
+		</script>		
+		
+	</head>
+	
+	<body bgcolor=#FFFFFF>
+		<div id="bg">
+			<!-- Output Button -->
+			<div id="output_01_btn"><? io_echo_equ($o0, 0, "<a href=index.html?o0=1><img src=b-gr.gif border=0></a>", ""); ?></div>
+			<div id="output_02_btn"><? io_echo_equ($o0, 0, "", "<a href=index.html?o0=0><img src=b-g.gif border=0></a>"); ?></div>
+			<!-- Output LED -->
+			<div id="output_03_btn"><? io_echo_equ($o0, 0, "", "<img src=output_on.gif border=0>"); ?></div>
+			
+			<!-- Input0 Button Down -->
+			<div id="input_01_btn"><? io_echo_equ($i0, 0, "<img src=b-gr.gif border=0>", ""); ?></div>
+			<!-- Input1 Button Down -->
+			<div id="input_02_btn"><? io_echo_equ($i1, 0, "<img src=b-gr.gif border=0>", ""); ?></div>
+			
+			<!-- Input0 Button Up -->
+			<div id="input_03_btn"><? io_echo_equ($i0, 0, "", "<img src=b-y.gif border=0>"); ?></div>
+			<!-- Input1 Button Up -->
+			<div id="input_04_btn"><? io_echo_equ($i1, 0, "", "<img src=b-y.gif border=0>"); ?></div>
+			<!-- Input LED -->
+			<div id="input_05_btn"><? io_echo_equ($i0, 0, "", "<img src=input_on.gif border=0>"); ?></div>
+			<div id="input_06_btn"><? io_echo_equ($i1, 0, "", "<img src=input_on.gif border=0>"); ?></div>
+			
+			<div id="output_01_cmt"><? io_echo($co0); ?></div>
+			<div id="input_01_cmt"><? io_echo($ci0); ?></div>
+			<div id="input_02_cmt"><? io_echo($ci1); ?></div>
+			<a href="http://www.eztcp.com" target="black"><div id="home_btn">H</div></a>
+			<a href="index.html"><div id="read_btn">R</div></a>
+			<a href="javascript:toggleStatus();"><div id="user_btn">U</div></a>
+			<div id="status" style="display:none;">
+				<ul>
+					<li>ID : CIE-H12</li>
+				</ul>
+			</div>
+			
+			
+		</div>
+	</body>
+</html>

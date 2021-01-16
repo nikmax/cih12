@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>CIE-H12</title>
+		<meta name="author" content="Sollae Systems Co., Ltd.">
+		<meta name="copyright" content="&copy;2018 Sollae Systems Co., Ltd.">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+		<link rel="icon" href="favicon.ico" type="images/x-icon">
+		<link rel="shortcut icon" href="favicon.ico" type="images/x-icon">
+		<link rel="apple-touch-icon" href="remio.png">
+		<script type="text/javascript">
+			window.addEventListener("load", function(){setTimeout(loaded, 100)}, false);
+			function loaded(){window.scrollTo(0, 1);}
+		</script>
+
+		<style type="text/css">
+			<!--
+			/* common */
+			body,h1,h2{margin:0;padding:0;-webkit-text-size-adjust:none;}
+
+			#wrap{min-width:314px;}
+
+			/* header */
+			.hd{position:relative;padding:15px 0 0 18px;height:32px;background:url(bg.gif) repeat-x left top;}
+			.hd h1{position:absolute;top:8px; left:20px;}
+			.hd h2{position:absolute;top:8px; right:20px;}
+
+			/* notice */
+			.notice{padding:5px 0 0 10px;border-bottom:1px solid #e5e5e5;}
+
+			/* contents */
+			.list{padding:10px 10px 10px 10px;border-bottom:1px solid #e5e5e5;}
+
+			.Button {
+				-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+				-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+				box-shadow:inset 0px 1px 0px 0px #ffffff;
+				background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #d1d1d1) );
+				background: -moz-linear-gradient( center top, #ffffff 5%, #d1d1d1 100% );
+				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d1d1d1');
+				background-color:#d7d7d7;
+				-moz-border-radius:6px;
+				-webkit-border-radius:6px;
+				border-radius:6px;
+				border:1px solid #dcdcdc;
+				display:inline-block;
+				color:#777777;
+				font-family:arial;
+				font-size:15px;
+				font-weight:bold;
+				padding:6px 24px;
+				text-decoration:none;
+				text-shadow:1px 1px 0px #ffffff;
+			}
+			.Button:hover {
+				background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d1d1d1), color-stop(1, #ffffff) );
+				background:-moz-linear-gradient( center top, #d1d1d1 5%, #ffffff 100% );
+				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d1d1d1', endColorstr='#ffffff');
+				background-color:#d1d1d1;
+			}
+			.Button:active {
+				position:relative;
+				top:1px;
+			}
+			/* orange - text for input ports */
+			.Button font{
+				color:#f78d1d;
+				
+			}
+			/* black - text for both input & output ports */
+			.Button span{
+				color: #333;
+				text-decoration:none;
+			}
+			/* green - text for output ports */
+			.Button a{
+				color: #64991e;
+				text-decoration:none;
+			}
+			-->
+		</style>
+	</head>
+	
+	<body bgcolor=#FFFFFF onorientationchange="updateOrientation();"> 
+		<div id="wrap">
+
+			<!-- header -->
+			<div class="hd">
+				<h1><a href="index.html" class="Button">점검</a></h1>
+				<h2><a href="manage.html" class="Button">관리</a></h2>
+			</div>
+			<!-- //header -->
+
+			<div class="notice">
+				Input Ports
+			</div>
+			<div class="list">
+				<div class="Button"><? io_echo_equ($i0, 0, "<span>OFF</span>", "<font>ON</font>"); ?></div>
+				<em><? io_echo($ci0); ?></em>	
+			</div>
+			<div class="list">
+				<div class="Button"><? io_echo_equ($i1, 0, "<span>OFF</span>", "<font>ON</font>"); ?></div>
+				<em><? io_echo($ci1); ?></em>
+			</div>
+
+			<div class="notice">
+				Output Ports
+			</div>
+			<div class="list">
+				<div class="Button"><? io_echo_equ($o0, 0, "<a href=index.html?o0=1><span>OFF</span></a>", "<a href=index.html?o0=0>ON</a>"); ?></div>
+				<em><? io_echo($co0); ?></em>
+			</div>
+
+		</div>
+	</body>
+</html>

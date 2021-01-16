@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CIE-H12</title>
+		<meta name="author" content="Sollae Systems Co., Ltd.">
+		<meta name="copyright" content="&copy;2018 Sollae Systems Co., Ltd.">
+		<link rel="icon" href="favicon.ico" type="images/x-icon">
+		<link rel="shortcut icon" href="favicon.ico" type="images/x-icon">
+		<style type="text/css">
+			<!--
+				
+			/* Background image */
+				#bg {position:relative; margin: 0 auto; width: 617px; height: 244px; top: 80px; background: url(bg.jpg) no-repeat;}
+		
+			/* Comments of CIE-H12 */
+				#input_01_cmt {font-size:11px; position:absolute; top:140px; left:15px;}
+				#input_02_cmt {font-size:11px; position:absolute; top:170px; left:15px;}
+				#output_01_cmt {font-size:11px; position:absolute; top:149px; right:18px;}
+
+			/* DI0 LED of CIE-H12 */			
+				#input_01 {position:absolute; top:136px; left:200px; margin:0; padding:25px 0 0 0; height:0px !important; width:100px; background-image: url(leds.jpg); background-repeat: no-repeat; }
+				#input_01.on {background-position : 0 0; }
+				#input_01.off {background-position : 0 -25px;}
+
+			/* DI1 LED of CIE-H12 */			
+				#input_02 {position:absolute; top:166px; left:200px; margin:0; padding:25px 0 0 0; height:0px !important; width:100px; background-image: url(leds.jpg); background-repeat: no-repeat;}
+				#input_02.on {background-position : 0 -50px;}
+				#input_02.off {background-position : 0 -75px;}	
+
+			/* DO0 LED of CIE-H12 */			
+				#output_01 {position:absolute; top:146px; left:383px; margin:0; padding:25px 0 0 0; height:0px !important; width:100px; background-image: url(leds.jpg); background-repeat: no-repeat;}
+				#output_01.on {background-position : 0 -100px;}
+				#output_01.off {background-position : 0 -125px; }		
+
+			-->			
+		</style>
+		<script type="text/javascript">
+			//
+			function showResult() {
+				/*
+				* readyState = 4 : 요청에 대한 응답이 완료됨을 나타내는 상태값 (요청전의 상태값은 0)
+				* status = 200   : HTTP 응답이 정상적으로 완료됨을 나태내는 상태값
+				*/			
+				if(myAjax.readyState == 4 && myAjax.status == 200) {
+					var received = eval("("+myAjax.responseText+")");
+					
+					// 응답완료된 데이터가 존재하면 해당 데이터를 
+					// 각 데이터의 위치에 맞게 innerHTML을 사용하여 삽입
+					if(received != null) {
+						// 상태 변화가 있을때만 (on -> off , off -> on) HTML code 변경함
+						if( !(self.document.getElementById("io_i0").innerHTML.indexOf("on", 0) != -1 && received.io_i0.indexOf("on", 0) != -1)) {
+							self.document.getElementById("io_i0").innerHTML = received.io_i0;
+						} 
+						if( !(self.document.getElementById("io_i1").innerHTML.indexOf("on", 0) != -1 && received.io_i1.indexOf("on", 0) != -1)) {
+							self.document.getElementById("io_i1").innerHTML = received.io_i1;
+						}
+						if (!(self.document.getElementById("io_o0").innerHTML.indexOf("on", 0) != -1 && received.io_o0.indexOf("on", 0) != -1)) {
+							self.document.getElementById("io_o0").innerHTML = received.io_o0;
+						}
+					}
+				}
+			}
+			
+			// 최초 페이지가 로딩되었을때 실행되는 함수
+			function initPage() { 
+				myAjax.open("GET","getStatusInfo.html");
+				myAjax.onreadystatechange = showResult;
+				myAjax.send("");
+				timerStart();
+			}
+			
+			// Output port가 클릭되었거나, 자동타이머가 종료되어 상태값을 읽어올 때 실행되는 함수
+			function getStatusInfo(data) {
+				// 요청시에 사용할 페이지 주소
+				var oParam = "getStatusInfo.html";
+				// Get 방식으로 요청을 보내기 때문에 페이지 주소에 파라미터를 추가
+				if ( "" != data ) {
+					oParam = oParam + "?" + data;
+				} 
+				// open() 함수로 요청할 페이지 주소와 요청 방식을 설정
+				myAjax.open("GET", oParam);
+				// readystatechange 이벤트가 발생할 때 실행되는 함수 지정
+				myAjax.onreadystatechange = showResult;
+				// send() 함수로 서버로 요청을 보냄
+				myAjax.send("");		
+			}
+			
+			// 타이머 초기값 설정 및 시작함수
+			function timerStart(){
+					tcounter = 1; 
+					t1 = setInterval(Timer,1000); // setInterval( 처리, 시간설정(1/1000)초 ) : 설정된 시간마다 처리할 구문(함수, 스크립트 등등)을 처리함
+			}
+
+			// 타이머 함수
+			function Timer(){
+				tcounter = tcounter - 1; // 시간 1초씩 감소
+				if( tcounter < 0 ) timerStop(); // 카운터가 0이하가 되면 타이머 정지함수 호출
+			}
+			
+			// 타이머 정지함수
+			// 타이머가 정지되면 Interval을 초기화 하고 상태값을 읽어오는 함수를 호출하고 Timer를 다시 시작함
+			function timerStop(){
+				clearInterval(t1)	// setInterval 함수 종료
+				getStatusInfo();	// 상태값을 읽어오기 위한 함수 호출
+				timerStart();		// Timer 시작 함수 호출
+			}
+			
+			 // Ajax 객체 생성
+			 // Internet Explorer는 ActiveXObject 함수를 사용하고 그 외에는 XMLHttpRequest 함수를 사용하여 AJAX 객체를 생성함
+			if(typeof(ActiveXObject) != "undefined") var myAjax = new ActiveXObject("Microsoft.XMLHTTP");  
+			else var myAjax = new XMLHttpRequest();
+		</script>
+	</head>
+	<body onload="javascript:initPage();">
+		<div id="bg">
+
+			<span id="io_i0"></span>
+			<span id="io_i1"></span>			
+			<span id="io_o0"></span>
+
+			<div id="input_01_cmt"><? io_echo($ci0); ?></div>
+			<div id="input_02_cmt"><? io_echo($ci1); ?></div>
+			<div id="output_01_cmt"><? io_echo($co0); ?></div>	
+		</div>
+	</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Tor 2 / 205</title>
+		<meta name="author" content="Sollae Systems Co., Ltd.">
+		<meta name="copyright" content="&copy;2018 Sollae Systems Co., Ltd.">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+		<link rel="icon" href="favicon.ico" type="images/x-icon">
+		<link rel="shortcut icon" href="favicon.ico" type="images/x-icon">
+		<link rel="apple-touch-icon" href="remio2.png">
+		<script type="text/javascript">
+			window.addEventListener("load", function(){setTimeout(loaded, 100)}, false);
+			function loaded(){window.scrollTo(0, 1);}
+		</script>
+
+		<style type="text/css">
+			<!--
+			/* common */
+			body,h1,h2{margin:0;padding:0;-webkit-text-size-adjust:none;}
+
+			#wrap{min-width:314px;}
+
+			/* header */
+			.hd{position:relative;padding:15px 0 0 18px;height:32px;background:url(bg.gif) repeat-x left top;}
+			.hd h1{position:absolute;top:8px; left:20px;}
+			.hd h2{position:absolute;top:8px; right:20px;}
+
+			/* notice */
+			.notice{padding:5px 0 0 10px;border-bottom:1px solid #e5e5e5;}
+
+			/* contents */
+			.list{padding:10px 10px 10px 10px;border-bottom:1px solid #e5e5e5;}
+
+			.Button {
+				-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+				-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+				box-shadow:inset 0px 1px 0px 0px #ffffff;
+				background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #d1d1d1) );
+				background: -moz-linear-gradient( center top, #ffffff 5%, #d1d1d1 100% );
+				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d1d1d1');
+				background-color:#d7d7d7;
+				-moz-border-radius:6px;
+				-webkit-border-radius:6px;
+				border-radius:6px;
+				border:1px solid #dcdcdc;
+				display:inline-block;
+				color:#777777;
+				font-family:arial;
+				font-size:15px;
+				font-weight:bold;
+				padding:6px 24px;
+				text-decoration:none;
+				text-shadow:1px 1px 0px #ffffff;
+			}
+			.Button:hover {
+				background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d1d1d1), color-stop(1, #ffffff) );
+				background:-moz-linear-gradient( center top, #d1d1d1 5%, #ffffff 100% );
+				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d1d1d1', endColorstr='#ffffff');
+				background-color:#d1d1d1;
+			}
+			.Button:active {
+				position:relative;
+				top:1px;
+			}
+			/* orange - text for input ports */
+			.Button font{
+				color:#f78d1d;
+			}
+			/* black - text for both input & output ports */
+			.Button span {
+				color: #333;
+				text-decoration:none;
+			}
+			/* green - text for output ports */
+			.Button a{
+				color: #64991e;
+				text-decoration:none;
+			}
+			-->
+		</style>
+
+		<script>
+			function showResult() {
+				if(myAjax.readyState == 4 && myAjax.status == 200) {
+					var received = eval("("+myAjax.responseText+")");
+					if(received != null) {
+						self.document.getElementById("io_i0").innerHTML = received.io_i0;
+						self.document.getElementById("io_i1").innerHTML = received.io_i1;
+						self.document.getElementById("io_o0").innerHTML = received.io_o0;
+						}
+					}
+				}
+			function initPage() { 
+				myAjax.open("GET","getStatusInfo.html");
+				myAjax.onreadystatechange = showResult;
+				myAjax.send("");
+				timerStart();
+				}
+			function getStatusInfo(data) {
+				var oParam = "getStatusInfo.html";
+				if ( "" != data ) {
+					oParam = oParam + "?" + data;
+				} 
+				myAjax.open("GET", oParam);
+				myAjax.onreadystatechange = showResult;
+				myAjax.send("");		
+				}
+			function timerStart(){
+				tcounter = 1; 
+				t1 = setInterval(Timer,1000);
+				}
+			function Timer(){
+				tcounter = tcounter - 1;
+				if( tcounter < 0 ) timerStop();
+				}
+			function timerStop(){
+				clearInterval(t1)
+				getStatusInfo("");
+				timerStart();
+				}
+			
+			 // Ajax °´Ã¼ »ý¼º
+			 // Internet Explorer´Â ActiveXObject ÇÔ¼ö¸¦ »ç¿ëÇÏ°í ±× ¿Ü¿¡´Â XMLHttpRequest ÇÔ¼ö¸¦ »ç¿ëÇÏ¿© AJAX °´Ã¼¸¦ »ý¼ºÇÔ
+			if(typeof(ActiveXObject) != "undefined") var myAjax = new ActiveXObject("Microsoft.XMLHTTP");  
+			else var myAjax = new XMLHttpRequest();
+		</script>
+
+
+
+	</head>
+	
+	<body onorientationchange="updateOrientation();" onload="javascript:initPage();"> 
+		<div id="wrap">
+			<div class="hd"><h1><a href="index.html" class="Button">TOR 2 / 205</a></h1></div>
+
+			<div class="notice">Torbewegung</div>
+			<div class="list"><div class="Button" id="io_i0"></div><div class="Button" id="io_i1"></div></div>
+
+			<div class="notice">Tor auf / Tor zu</div>
+			<div class="list"><div class="Button" id="io_o0"></div></div>
+
+		</div>
+	</body>
+</html>

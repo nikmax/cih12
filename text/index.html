@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+	<head>
+		<title>CIE-H12</title>
+		<meta name="author" content="Sollae Systems Co., Ltd.">
+		<meta name="copyright" content="&copy;2018 Sollae Systems Co., Ltd.">
+		<link rel="icon" href="favicon.ico" type="images/x-icon">
+		<link rel="shortcut icon" href="favicon.ico" type="images/x-icon">
+
+		<style>
+		<!--
+		.G{border:.5pt solid;background:#339966;}
+		.D{color:black;font-size:11pt;font-weight:400;font-family:"Times New Roman", serif;background:#339966;text-align:center;}
+		.C{color:black;font-size:11pt;font-weight:400;font-family:"Times New Roman", serif;text-align:left;}
+		.S{color:white;font-size:11pt;font-weight:400;font-family:"Times New Roman", serif;background:black;text-align:center;}
+		.O{color:white;font-size:11pt;font-weight:400;font-family:"Times New Roman", serif;background:black;text-align:center;}
+		.T{color:black;font-size:11pt;font-weight:400;font-family:"Times New Roman", serif;text-align:right;}
+		-->
+		</style>
+	</head>
+	<body bgcolor=white>
+		<center>
+		<br>
+		<b>
+			<table border=0>
+				<tr>
+					<td class=T><b><font color=orange>Sollae Systems</font> : CIE-H12 </b</td><td width=250></td><td class=T>[<a href="index.html">Read</a>]</td>
+				</tr>
+			</table>
+			<table border=1 cellpadding=0 cellspacing=0>
+				<tr>
+					<td class=O width=40>Input</td>
+					<td class=O width=40>Status</td>
+					<td class=O width=150>Comment</td>
+					<td class=S rowspan=9 width=2></td>
+					<td class=O width=40>Ouput</td>
+					<td class=O width=40>Status</td>
+					<td class=O width=150>Comment</td>
+				</tr>
+				<tr>
+					<td class=D>DI 0</td>
+					<td class=S><? io_echo_equ($i0, 0, "<font color=green>Off</font>", "<font color=orange>On</font>"); ?></td>
+					<td class=C><? io_echo($ci0); ?></td>
+					<td class=D rowspan='2'>DO 0</td>
+					<td class=S rowspan='2'><? io_echo_equ($o0, 0, "<a href=index.html?o0=1><font color=green>Off</font></a>", "<a href=index.html?o0=0><font color=orange>On</font></a>"); ?></td>
+					<td class=C rowspan='2'><? io_echo($co0); ?></td>
+				</tr>
+				<tr>
+					<td class=D>DI 1</td>
+					<td class=S><? io_echo_equ($i1, 0, "<font color=green>Off</font>", "<font color=orange>On</font>"); ?></td>
+					<td class=C><? io_echo($ci1); ?></td>
+				</tr>
+			</table>
+		</center>
+	</body>
+</html>

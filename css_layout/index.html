@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CIE-H12</title>
+		<meta name="author" content="Sollae Systems Co., Ltd.">
+		<meta name="copyright" content="&copy;2018 Sollae Systems Co., Ltd.">
+		<link rel="icon" href="favicon.ico" type="images/x-icon">
+		<link rel="shortcut icon" href="favicon.ico" type="images/x-icon">
+		<style type="text/css">
+		<!--
+			body { margin: 30px; padding: 0;  background:#201F25; }
+			#wrapper { margin-top:10px; width:600px; margin: 0 auto; margin-right:auto; margin-left:auto; border-radius:20px; }
+			#header { width:600px; height:100px; font-family:calibri; color:white; font-weight:bold; font-size:2.5em; background:#015C93; 
+					  text-align:center; vertical-align:middle; display:table-cell; border-top-right-radius:15px; border-top-left-radius:15px; }
+			#left { width:299px; height:350px; float: left; border-right:1px solid darkgrey; background:#F1F1F1; text-align:center; }
+			#right { width:299px; height:350px; float: right; border-left:1px solid darkgrey; background:#F1F1F1; text-align:center; }
+			#footer{ width:600px; height:100px; clear: both; background:#5B8C00; font-family:calibri; color:white; font-weight:bold; font-size:15px; 
+					 text-align:center; vertical-align:middle; display:table-cell; border-bottom-right-radius:15px; border-bottom-left-radius:15px; }
+			.comment{ width:281px; font-family:calibri,µ¸¿ò; color:#7AD2D9; font-weight:bold; font-size:20px; text-align:center; background-color:#003642; 
+					  text-align:center; padding:9px; filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,  StartColorStr=#002E38, EndColorStr=#006377); }
+			.button{ width:281px; height:115px; text-align:center; padding:9px; vertical-align:middle; display:table-cell; }
+			.read{ position:absolute; top:400px; width:280px; text-align:center; padding:9px; vertical-align:middle; display:table-cell; }		
+			#read { background-color:#ededed; border:1px solid #dcdcdc; color:#777777; font-size:13px; font-weight:bold; padding:5px 14px; 
+					text-decoration:none; border-radius:10px; }
+			#read:hover {background-color:#dfdfdf;}
+		-->
+		</style>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="header">CIE-H12</div>
+				<div id="left">
+					<div id="dry_input_cmt" class="comment"><? io_echo($ci0); ?></div>
+					<div id="dry_input_btn" class="button"><? io_echo_equ($i0, 0, "<img src=off.png border=0>", "<img src=on.png border=0>"); ?></div>
+					<div id="wet_input_cmt" class="comment"><? io_echo($ci1); ?></div>	 
+					<div id="wet_input_btn" class="button"><? io_echo_equ($i1, 0, "<img src=off.png border=0>", "<img src=on.png border=0>"); ?></div>
+				</div>
+				<div id="right">
+					<div id="output_cmt" class="comment"><? io_echo($co0); ?></div>
+					<div id="output_btn" class="button"><? io_echo_equ($o0, 0, "<a href=index.html?o0=1><img src=off.png border=0></a>", "<a href=index.html?o0=0><img src=on.png border=0></a>"); ?></div>
+					<div class="read"><a href="index.html" id="read">Read</a></div>
+				</div>
+				<div id="footer">
+					Sollae Systems Co.,Ltd.<br>
+					PH +82.32.245.2323 | MAIL TO <a href="mailto:support@eztcp.com">support@eztcp.com</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
